@@ -1,6 +1,6 @@
 package e.david.weasleyclock.models;
 
-public class Location {
+public class OurLocation {
 
     private String locationName;
     private String gmapsLocation;
@@ -19,5 +19,9 @@ public class Location {
 
     public void setGmapsLocation(String gmapsLocation) {
         this.gmapsLocation = gmapsLocation;
+    }
+
+    public OurLocation(String locationName) {
+        this.locationName = locationName;
     }
 }
