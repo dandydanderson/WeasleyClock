@@ -1,5 +1,11 @@
 package e.david.weasleyclock;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,17 +15,28 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Tag;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import e.david.weasleyclock.models.Family;
+import e.david.weasleyclock.models.OurLocation;
+import e.david.weasleyclock.models.User;
+import e.david.weasleyclock.services.LocationService;
 
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    public final int REQUEST_CODE = 1;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +54,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            // ask permissions here using below code
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_CODE);
+        }
+
+        LocationService ls = new LocationService(this);
+        Location loc = ls.getCoordinates();
+        System.out.println("Latitude: " + loc.getLatitude());
+        System.out.println("Longitude: " + loc.getLongitude());
+
+
+
+
+        Family testFamily = new Family();
+        testFamily.setFamilyName("Ravens");
+
+
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference(testFamily.getFamilyName());
 
-        myRef.setValue("Hello, World!");
+       //  public User(String username, String password, Location displayedLocation, Location workLocation, Location homeLocation, String otherLocation, String family) {
+
+        User test = new User("Larry", "Password", new OurLocation("home"), new OurLocation("work"),new OurLocation("home"), "other", "Raven");
+        User test2 = new User("Jerry", "Password", new OurLocation("work"), new OurLocation("work"),new OurLocation("home"), "other", "Raven");
+
+
+        Family.addMember(test, testFamily);
+        Family.addMember(test2, testFamily);
+
+         myRef.setValue(testFamily.getFamilyMembers().toString());
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
@@ -62,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("Unable to get data");
             }
         });
+
+
 
 
 

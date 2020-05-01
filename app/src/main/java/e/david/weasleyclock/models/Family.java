@@ -24,7 +24,7 @@ public class Family {
         this.familyMembers = familyMembers;
     }
 
-    static void addMember (User user, Family family){
+    public static void addMember (User user, Family family){
         family.getFamilyMembers().add(user);
     }
 

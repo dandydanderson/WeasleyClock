@@ -4,9 +4,9 @@ public class User {
 
     private String username;
     private String password;
-    private Location displayedLocation;
-    private Location workLocation;
-    private Location homeLocation;
+    private OurLocation displayedOurLocation;
+    private OurLocation workOurLocation;
+    private OurLocation homeOurLocation;
     private String otherLocation;
     private String family;
 
@@ -26,20 +26,20 @@ public class User {
         this.username = username;
     }
 
-    public Location getWorkLocation() {
-        return workLocation;
+    public OurLocation getWorkOurLocation() {
+        return workOurLocation;
     }
 
-    public void setWorkLocation(Location workLocation) {
-        this.workLocation = workLocation;
+    public void setWorkOurLocation(OurLocation workOurLocation) {
+        this.workOurLocation = workOurLocation;
     }
 
-    public Location getHomeLocation() {
-        return homeLocation;
+    public OurLocation getHomeOurLocation() {
+        return homeOurLocation;
     }
 
-    public void setHomeLocation(Location homeLocation) {
-        this.homeLocation = homeLocation;
+    public void setHomeOurLocation(OurLocation homeOurLocation) {
+        this.homeOurLocation = homeOurLocation;
     }
 
     public String getOtherLocation() {
@@ -58,21 +58,34 @@ public class User {
         this.family = family;
     }
 
-    public Location getDisplayedLocation() {
-        return displayedLocation;
+    public OurLocation getDisplayedOurLocation() {
+        return displayedOurLocation;
     }
 
-    public void setDisplayedLocation(Location displayedLocation) {
-        this.displayedLocation = displayedLocation;
+    public void setDisplayedOurLocation(OurLocation displayedOurLocation) {
+        this.displayedOurLocation = displayedOurLocation;
+    }
+
+    public User(String username, String password, OurLocation displayedOurLocation, OurLocation workOurLocation, OurLocation homeOurLocation, String otherLocation, String family) {
+        this.username = username;
+        this.password = password;
+        this.displayedOurLocation = displayedOurLocation;
+        this.workOurLocation = workOurLocation;
+        this.homeOurLocation = homeOurLocation;
+        this.otherLocation = otherLocation;
+        this.family = family;
     }
 
     @Override
     public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", displayedLocation='" + displayedLocation + '\'' +
+        return "{" +
+                "username:'" + username + '\'' +
+                ", password:'" + password + '\'' +
+                ", displayedLocation:" + displayedOurLocation.getLocationName() +
+                ", workLocation:" + workOurLocation.getLocationName() +
+                ", homeLocation:" + homeOurLocation.getLocationName() +
+                ", otherLocation:'" + otherLocation + '\'' +
+                ", family:'" + family + '\'' +
                 '}';
     }
-
-
 }
