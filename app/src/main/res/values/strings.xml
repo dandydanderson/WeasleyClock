@@ -6,11 +6,16 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="signIn">Sign In</string>
-    <string name="signUp">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name">Name</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="ministryLogo">Ministry Logo</string>
+    <string name="ministry_logo">Ministry Logo</string>
+    <string name="registration_welcome">As a muggle you must register to have access to the magic
+    that makes this clock possible. Please provide the following information:</string>
+    <string name="terms_agreement">Please click here to agree to our Terms of Service.</string>
+    <string name="registration_button">Register</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
